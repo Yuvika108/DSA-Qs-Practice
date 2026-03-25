@@ -1,22 +1,24 @@
+#include <vector>
+using namespace std;
+
 class Solution {
 public:
-    int maxFrequency(vector<int>& nums, int k) 
-    {
-        sort(nums.begin(), nums.end());
+  int maxFrequency(vector<int> &nums, int k) {
+    sort(nums.begin(), nums.end());
 
-        long long total = 0;  // Needs to be long long to avoid overflow
-        int left = 0, res = 0;
-        
-        for (int right = 0; right < nums.size(); right++) {
-            total += nums[right];
+    long long total = 0; // Needs to be long long to avoid overflow
+    int left = 0, res = 0;
 
-            while ((long long)nums[right] * (right - left + 1) > total + k) {
-                total -= nums[left];
-                left++;
-            }
+    for (int right = 0; right < nums.size(); right++) {
+      total += nums[right];
 
-            res = max(res, right - left + 1);
-        }
-        return res;
+      while ((long long)nums[right] * (right - left + 1) > total + k) {
+        total -= nums[left];
+        left++;
+      }
+
+      res = max(res, right - left + 1);
     }
+    return res;
+  }
 };

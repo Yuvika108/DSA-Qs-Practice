@@ -1,14 +1,18 @@
+#include <unordered_map>
+#include <vector>
+using namespace std;
+
 class Solution {
 public:
-    int majorityElement(vector<int>& nums) {
-        int n=nums.size();
-        unordered_map<int, int> count;
-        for(int i:nums){
-            count[i]++;
-            if(count[i]> (n/2)){
-                return i;
-            }
-        }
-        return 0;
+  int majorityElement(vector<int> &nums) {
+    int n = nums.size();
+    unordered_map<int, int> count;
+    for (int i : nums) {
+      count[i]++;
+      if (count[i] > (n / 2)) {
+        return i;
+      }
     }
+    return 0;
+  }
 };
