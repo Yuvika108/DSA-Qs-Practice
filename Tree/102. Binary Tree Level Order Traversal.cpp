@@ -28,7 +28,7 @@ public:
   vector<vector<int>> levelOrder(TreeNode *root) {
     vector<vector<int>> ans;
 
-    if (root == NULL)
+    if (root == nullptr)
       return ans;
     queue<TreeNode *> q;
 
@@ -43,11 +43,11 @@ public:
         TreeNode *f = q.front();
         q.pop();
 
-        if (f->left != NULL) {
+        if (f->left != nullptr) {
           q.push(f->left);
           level.push_back(f->left->val);
         }
-        if (f->right != NULL) {
+        if (f->right != nullptr) {
           q.push(f->right);
           level.push_back(f->right->val);
         }

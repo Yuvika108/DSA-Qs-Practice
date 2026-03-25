@@ -27,7 +27,7 @@ class Solution {
 public:
   vector<int> ans;
   void postOrder(TreeNode *root) {
-    if (root == NULL)
+    if (root == nullptr)
       return;
     postOrder(root->left);
     postOrder(root->right);

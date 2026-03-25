@@ -18,7 +18,7 @@ class Solution {
 public:
   bool ans = true;
   int height(TreeNode *root) {
-    if (root == NULL)
+    if (root == nullptr)
       return 0;
     int left = height(root->left);
     int right = height(root->right);
@@ -29,7 +29,7 @@ public:
     return max(left, right) + 1;
   }
   bool isBalanced(TreeNode *root) {
-    if (root == NULL)
+    if (root == nullptr)
       return true;
     height(root);
     return ans;

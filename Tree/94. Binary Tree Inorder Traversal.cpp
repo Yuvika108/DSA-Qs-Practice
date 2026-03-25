@@ -26,7 +26,7 @@ class Solution {
 public:
   vector<int> ans;
   void inBuild(TreeNode *root) {
-    if (root == NULL)
+    if (root == nullptr)
       return;
 
     inBuild(root->left);

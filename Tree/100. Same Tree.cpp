@@ -13,9 +13,9 @@ struct TreeNode {
 class Solution {
 public:
   bool isSameTree(TreeNode *p, TreeNode *q) {
-    if (p == NULL && q == NULL)
+    if (p == nullptr && q == nullptr)
       return true;
-    if (p == NULL || q == NULL)
+    if (p == nullptr || q == nullptr)
       return false;
 
     if (p->val != q->val)

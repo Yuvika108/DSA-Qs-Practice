@@ -28,7 +28,7 @@ public:
   vector<int> ans;
   void preOrder(TreeNode *root) {
     // base case
-    if (root == NULL)
+    if (root == nullptr)
       return;
 
     // preOrder
