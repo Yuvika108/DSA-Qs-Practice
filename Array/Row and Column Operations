@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int main() {
+	ll n,q,x,mr,mc,rc=0;
+	cin >> n >> q;
+	
+	//n= size of grid, q=no of performed operations
+	
+	ll max_row = 0, max_col = 0;
+	vector<ll> row_sum(n,0);
+	vector<ll> col_sum(n,0);
+	
+	while(q--){
+	    string s;
+	    cin >> s >> rc >> x;
+	    
+	    if(s[0]=='R') row_sum[rc-1]+=x;
+	    else col_sum[rc-1]+=x;
+	}
+	
+	mr = *max_element(row_sum.begin(), row_sum.end());
+	mc = *max_element(col_sum.begin(), col_sum.end());
+	
+	cout << mr+mc << endl;
+	
+    return 0;
+}
