@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+	int t;
+	cin >> t;
+	
+	while(t--){
+	    string A, B;
+	    cin >> A >> B;
+	    
+	    int freq[26] = {0};
+	    
+	    for(char c : A) freq[c-'a']++;
+	    for(char c : B) freq[c-'a']++;
+	    
+	    int n;
+	    cin >> n;
+	    
+	    bool ans = true;
+	    
+	    for(int i=0; i<n; i++){
+    	    string C;
+    	    cin >> C;
+    	    for(char c : C) freq[c-'a']--;
+	    }
+	    
+	    for(int i=0; i<26; i++){
+	        if(freq[i]<0){
+	            ans = false;
+	            break;
+	        }
+	    }
+	    
+	    cout << (ans ? "YES":"NO") << "\n";
+	}
+	
+    return 0;
+}
