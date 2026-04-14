@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+	ll t;
+	cin >> t;
+	
+	while(t--){
+	    ll n, k;
+	    cin >> n >> k;
+	    
+	    vector<ll> A(n);
+	    for(ll i=0; i<n; i++) cin >> A[i];
+	    
+	    if(n==1){
+	        cout << "YES \n";
+	        continue;
+	    }
+	    
+	    sort(A.begin(), A.end());
+	    
+	    if(A[0]+A[n-1]<=k){
+	        cout << "YES\n";
+	    }else{
+	        cout << "NO\n";
+	    }
+	    
+	}
+	
+    return 0;
+}
