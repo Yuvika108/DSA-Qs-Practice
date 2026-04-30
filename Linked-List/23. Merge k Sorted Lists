@@ -1,0 +1,54 @@
+#include <queue>
+#include <vector>
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ * int val;
+ * ListNode *next;
+ * ListNode() : val(0), next(nullptr) {}
+ * ListNode(int x) : val(x), next(nullptr) {}
+ * ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+
+class Solution {
+public:
+    // Custom comparator to make the priority queue a Min-Heap
+    struct compare {
+        bool operator()(ListNode* a, ListNode* b) {
+            return a->val > b->val;
+        }
+    };
+
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        priority_queue<ListNode*, vector<ListNode*>, compare> minHeap;
+
+        // 1. Push the head of each list into the min-heap
+        for (auto list : lists) {
+            if (list) {
+                minHeap.push(list);
+            }
+        }
+
+        // Dummy node helps simplify the head-of-list logic
+        ListNode* dummy = new ListNode(0);
+        ListNode* tail = dummy;
+
+        // 2. While heap is not empty, extract the smallest and move forward
+        while (!minHeap.empty()) {
+            ListNode* smallest = minHeap.top();
+            minHeap.pop();
+
+            tail->next = smallest;
+            tail = tail->next;
+
+            // If there's a next node in the list we just pulled from, add it to heap
+            if (smallest->next) {
+                minHeap.push(smallest->next);
+            }
+        }
+
+        return dummy->next;
+    }
+};
