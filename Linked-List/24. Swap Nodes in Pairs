@@ -1,0 +1,22 @@
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        // Base case: if list is empty or has only one node
+        if (!head || !head->next) {
+            return head;
+        }
+
+        // Nodes to be swapped
+        ListNode* firstNode = head;
+        ListNode* secondNode = head->next;
+
+        // Swapping logic
+        // The first node will now point to the result of the next pair swap
+        firstNode->next = swapPairs(secondNode->next);
+        // The second node now points to the first node
+        secondNode->next = firstNode;
+
+        // The second node is the new head of this pair
+        return secondNode;
+    }
+};
