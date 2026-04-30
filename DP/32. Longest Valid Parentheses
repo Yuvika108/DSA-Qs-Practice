@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int longestValidParentheses(string s) {
+        stack<int> st;
+        // Push -1 as a base for the first valid substring calculation
+        st.push(-1); 
+        int maxLen = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            if (s[i] == '(') {
+                // Store the index of the opening bracket
+                st.push(i);
+            } else {
+                // If it's a closing bracket, pop the top
+                st.pop();
+                
+                if (st.empty()) {
+                    // If stack is empty, this ')' is unmatched. 
+                    // Push its index as the new base for future calculations.
+                    st.push(i);
+                } else {
+                    // Calculate length: current index - index of the last unmatched bracket
+                    maxLen = max(maxLen, i - st.top());
+                }
+            }
+        }
+        
+        return maxLen;
+    }
+};
