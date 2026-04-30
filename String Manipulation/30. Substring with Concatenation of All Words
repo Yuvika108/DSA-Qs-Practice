@@ -1,0 +1,63 @@
+#include <vector>
+#include <string>
+#include <unordered_map>
+
+using namespace std;
+
+class Solution {
+public:
+    vector<int> findSubstring(string s, vector<string>& words) {
+        vector<int> result;
+        if (s.empty() || words.empty()) return result;
+
+        int n = s.length();
+        int wordCount = words.size();
+        int len = words[0].length();
+        int totalLen = wordCount * len;
+
+        if (n < totalLen) return result;
+
+        // Count frequency of each word in the input array
+        unordered_map<string, int> wordFreq;
+        for (const string& w : words) {
+            wordFreq[w]++;
+        }
+
+        // We only need to start from indices 0 to len-1
+        for (int i = 0; i < len; ++i) {
+            int left = i, right = i, count = 0;
+            unordered_map<string, int> windowFreq;
+
+            while (right + len <= n) {
+                string word = s.substr(right, len);
+                right += len;
+
+                if (wordFreq.count(word)) {
+                    windowFreq[word]++;
+                    count++;
+
+                    // If a word appears more times than it does in words[], 
+                    // slide the left pointer to shrink the window
+                    while (windowFreq[word] > wordFreq[word]) {
+                        string leftWord = s.substr(left, len);
+                        windowFreq[leftWord]--;
+                        count--;
+                        left += len;
+                    }
+
+                    // If the number of words matches, we found a valid index
+                    if (count == wordCount) {
+                        result.push_back(left);
+                    }
+                } else {
+                    // Word not in the list, reset the window
+                    windowFreq.clear();
+                    count = 0;
+                    left = right;
+                }
+            }
+        }
+
+        return result;
+    }
+};
