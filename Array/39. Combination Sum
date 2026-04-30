@@ -1,0 +1,41 @@
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+class Solution {
+public:
+    void backtrack(vector<int>& candidates, int target, vector<vector<int>>& result, vector<int>& current, int index) {
+        // Base case: success
+        if (target == 0) {
+            result.push_back(current);
+            return;
+        }
+
+        for (int i = index; i < candidates.size(); i++) {
+            // Optimization: If the current number is greater than the remaining target, 
+            // no need to check this or any subsequent (larger) numbers.
+            if (candidates[i] > target) break;
+
+            // Decision: Include candidates[i]
+            current.push_back(candidates[i]);
+            
+            // Recurse: Note we pass 'i' and not 'i + 1' because we can reuse the same element
+            backtrack(candidates, target - candidates[i], result, current, i);
+            
+            // Backtrack: Remove the last element to try the next candidate
+            current.pop_back();
+        }
+    }
+
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> result;
+        vector<int> current;
+        
+        // Sorting helps with the 'break' optimization inside the loop
+        sort(candidates.begin(), candidates.end());
+        
+        backtrack(candidates, target, result, current, 0);
+        return result;
+    }
+};
